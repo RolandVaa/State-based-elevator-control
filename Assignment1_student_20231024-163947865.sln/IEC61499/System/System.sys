@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE System SYSTEM "../LibraryElement.dtd">
+<System Name="System" Comment="System Configuration">
+  <Attribute Name="System.Device.FolderPath" Value="DEV" />
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="6/3/2016" />
+  <Application ID="A4ABD8400116F035" Name="APP1">
+    <SubAppNetwork>
+      <FB ID="A2387288512CA6E6" Name="Plant" Type="SimpleModel" x="2380" y="340" Namespace="Main" />
+      <FB ID="90215ECE0665F54E" Name="CTL" Type="ControlPLCcomp" x="1140" y="340" Namespace="Main">
+        <Parameter Name="MODE" Value="1" />
+      </FB>
+      <EventConnections>
+        <Connection Source="Plant.INITO" Destination="CTL.INIT" dx1="41.7085" dx2="30" dy="-110" />
+        <Connection Source="CTL.CNF" Destination="Plant.REQ" />
+        <Connection Source="Plant.CNF" Destination="CTL.REQ" dx1="71.7085" dx2="60" dy="-200">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+      </EventConnections>
+      <DataConnections>
+        <Connection Source="CTL.MoveUp" Destination="Plant.motorUp" />
+        <Connection Source="CTL.MoveDown" Destination="Plant.motorDown" />
+        <Connection Source="CTL.Open0" Destination="Plant.door0" />
+        <Connection Source="CTL.Open1" Destination="Plant.door1" />
+        <Connection Source="CTL.Open2" Destination="Plant.door2" />
+        <Connection Source="Plant.door2Opened" Destination="CTL.DoorOpened2" dx1="41.7085" dx2="30" dy="240">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door1Opened" Destination="CTL.DoorOpened1" dx1="71.7085" dx2="60" dy="340">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door0Opened" Destination="CTL.DoorOpened0" dx1="91.7085" dx2="100" dy="440">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door2Closed" Destination="CTL.DoorClosed2" dx1="111.7085" dx2="140" dy="540">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door1Closed" Destination="CTL.DoorClosed1" dx1="151.7085" dx2="180" dy="640">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door0Closed" Destination="CTL.DoorClosed0" dx1="191.7085" dx2="220" dy="740">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.requestFloor2" Destination="CTL.ButtonFor2" dx1="231.7085" dx2="260" dy="860">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.requestFloor1" Destination="CTL.ButtonFor1" dx1="271.7085" dx2="300" dy="960">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.requestFloor0" Destination="CTL.ButtonFor0" dx1="311.7085" dx2="340" dy="1060">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.buttonOnFloor2" Destination="CTL.ButtonAt2" dx1="311.7085" dx2="360" dy="-860">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.buttonOnFloor1" Destination="CTL.ButtonAt1" dx1="271.7085" dx2="320" dy="-780">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.buttonOnFloor0" Destination="CTL.ButtonAt0" dx1="231.7085" dx2="280" dy="-700">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.elevatorOnFloor2" Destination="CTL.OnFloor2" dx1="191.7085" dx2="240" dy="-620">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.elevatorOnFloor1" Destination="CTL.OnFloor1" dx1="171.7085" dx2="200" dy="-540">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.elevatorOnFloor0" Destination="CTL.OnFloor0" dx1="131.7085" dx2="160" dy="-440">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+      </DataConnections>
+    </SubAppNetwork>
+  </Application>
+  <Device ID="ffce78e9-25c1-473e-9667-c6dcc3f3bf60" Name="DEV" Type="Soft_dPAC" x="534.6564" y="459.8542" Namespace="SE.DPAC">
+    <Resource ID="AFC605D93B0DAF48" Name="RES0" Type="EMB_RES_ECO" Namespace="Runtime.Management">
+      <FBNetwork>
+        <FB ID="BCEA215D9FD97252" Name="Plant" Type="SimpleModel" x="2380" y="340" Namespace="Main" />
+        <FB ID="6B53B1BE5F12DDC7" Name="CTL" Type="ControlPLCcomp" x="1140" y="340" Namespace="Main">
+          <Parameter Name="MODE" Value="1" />
+        </FB>
+        <EventConnections>
+          <Connection Source="Plant.INITO" Destination="CTL.INIT" dx1="41.70825" dx2="30" dy="-110" />
+          <Connection Source="CTL.CNF" Destination="Plant.REQ" />
+          <Connection Source="Plant.CNF" Destination="CTL.REQ" dx1="71.70825" dx2="60" dy="-200">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="START.COLD" Destination="Plant.INIT" dx1="1228.604" />
+          <Connection Source="START.WARM" Destination="Plant.INIT" dx1="1228.604" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="CTL.MoveUp" Destination="Plant.motorUp" />
+          <Connection Source="CTL.MoveDown" Destination="Plant.motorDown" />
+          <Connection Source="CTL.Open0" Destination="Plant.door0" />
+          <Connection Source="CTL.Open1" Destination="Plant.door1" />
+          <Connection Source="CTL.Open2" Destination="Plant.door2" />
+          <Connection Source="Plant.door2Opened" Destination="CTL.DoorOpened2" dx1="41.70825" dx2="30" dy="240">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.door1Opened" Destination="CTL.DoorOpened1" dx1="71.70825" dx2="60" dy="340">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.door0Opened" Destination="CTL.DoorOpened0" dx1="91.70825" dx2="100" dy="440">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.door2Closed" Destination="CTL.DoorClosed2" dx1="111.7083" dx2="140" dy="540">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.door1Closed" Destination="CTL.DoorClosed1" dx1="151.7083" dx2="180" dy="640">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.door0Closed" Destination="CTL.DoorClosed0" dx1="191.7083" dx2="220" dy="740">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.requestFloor2" Destination="CTL.ButtonFor2" dx1="231.7083" dx2="260" dy="860">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.requestFloor1" Destination="CTL.ButtonFor1" dx1="271.7083" dx2="300" dy="960">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.requestFloor0" Destination="CTL.ButtonFor0" dx1="311.7083" dx2="340" dy="1060">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.buttonOnFloor2" Destination="CTL.ButtonAt2" dx1="311.7083" dx2="360" dy="-860">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.buttonOnFloor1" Destination="CTL.ButtonAt1" dx1="271.7083" dx2="320" dy="-780">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.buttonOnFloor0" Destination="CTL.ButtonAt0" dx1="231.7083" dx2="280" dy="-700">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.elevatorOnFloor2" Destination="CTL.OnFloor2" dx1="191.7083" dx2="240" dy="-620">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.elevatorOnFloor1" Destination="CTL.OnFloor1" dx1="171.7083" dx2="200" dy="-540">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="Plant.elevatorOnFloor0" Destination="CTL.OnFloor0" dx1="131.7083" dx2="160" dy="-440">
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <FBNetwork />
+  </Device>
+  <Mapping From="APP1.Plant" To="DEV.RES0" />
+  <Mapping From="APP1.CTL" To="DEV.RES0" />
+</System>

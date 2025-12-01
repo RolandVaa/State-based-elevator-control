@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2ec1b99f-d1c9-4c0a-8266-d8e5a4e63ee2" Name="DoorControl" Comment="Basic Function Block Type" Namespace="Main">
+  <Attribute Name="Configuration.FB.IDCounter" Value="0" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="6/17/2016" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="Static" />
+        <With Var="floor" />
+        <With Var="DoorClosed0" />
+        <With Var="DoorClosed1" />
+        <With Var="DoorClosed2" />
+        <With Var="DoorOpened0" />
+        <With Var="DoorOpened1" />
+        <With Var="DoorOpened2" />
+        <With Var="ButtonAt0" />
+        <With Var="ButtonAt1" />
+        <With Var="ButtonAt2" />
+        <With Var="ButtonFor0" />
+        <With Var="ButtonFor1" />
+        <With Var="ButtonFor2" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="Static" />
+        <With Var="floor" />
+        <With Var="DoorClosed0" />
+        <With Var="DoorClosed1" />
+        <With Var="DoorClosed2" />
+        <With Var="DoorOpened0" />
+        <With Var="DoorOpened1" />
+        <With Var="DoorOpened2" />
+        <With Var="ButtonAt0" />
+        <With Var="ButtonAt1" />
+        <With Var="ButtonAt2" />
+        <With Var="ButtonFor0" />
+        <With Var="ButtonFor1" />
+        <With Var="ButtonFor2" />
+      </Event>
+      <Event Name="T1exp" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="door0" />
+        <With Var="door1" />
+        <With Var="door2" />
+        <With Var="allClosed" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="door0" />
+        <With Var="door1" />
+        <With Var="door2" />
+        <With Var="allClosed" />
+      </Event>
+      <Event Name="T1" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Static" Type="BOOL" />
+      <VarDeclaration Name="floor" Type="INT" />
+      <VarDeclaration Name="DoorClosed0" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed1" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed2" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened0" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened1" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened2" Type="BOOL" />
+      <VarDeclaration Name="ButtonAt0" Type="BOOL" />
+      <VarDeclaration Name="ButtonAt1" Type="BOOL" />
+      <VarDeclaration Name="ButtonAt2" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor0" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor1" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor2" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="door0" Type="BOOL" />
+      <VarDeclaration Name="door1" Type="BOOL" />
+      <VarDeclaration Name="door2" Type="BOOL" />
+      <VarDeclaration Name="allClosed" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,CALC,CHK,OPEN0,OPEN1,OPEN2,CLOSING" />
+    <InternalVars>
+      <VarDeclaration Name="doOpen0" Type="BOOL" />
+      <VarDeclaration Name="doOpen1" Type="BOOL" />
+      <VarDeclaration Name="doOpen2" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="959.7355" y="429.4117" />
+      <ECState Name="INIT" x="1434.447" y="358.4763">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="closed" x="2028" y="476" />
+      <ECState Name="open" x="2112" y="2096">
+        <ECAction Output="T1" />
+      </ECState>
+      <ECState Name="closing" x="3208" y="1440">
+        <ECAction Algorithm="CLOSING" />
+        <ECAction Algorithm="CHK" Output="CNF" />
+      </ECState>
+      <ECState Name="opening0" x="736" y="1296">
+        <ECAction Algorithm="OPEN0" Output="CNF" />
+      </ECState>
+      <ECState Name="opening1" x="1588" y="1284">
+        <ECAction Algorithm="OPEN1" Output="CNF" />
+      </ECState>
+      <ECState Name="opening2" x="2468" y="1284">
+        <ECAction Algorithm="OPEN2" Output="CNF" />
+      </ECState>
+      <ECState Name="calc" x="2024" y="800">
+        <ECAction Algorithm="CALC" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1210.66" y="310.2446">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="293.3269,75.07034,314.8678,73.25665" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="closed" Condition="1" x="1739.549" y="517.4347">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="424.36,130.5606,449.8532,137.3035" />
+      </ECTransition>
+      <ECTransition Source="opening0" Destination="open" Condition="REQ[NOT DoorClosed0]" x="1054.312" y="1867.594">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="186.6234,450.2629,287.271,508.3338" />
+      </ECTransition>
+      <ECTransition Source="opening1" Destination="open" Condition="REQ[NOT DoorClosed1]" x="1735.656" y="1759.521">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="408.6199,416.2163,446.9048,475.1307" />
+      </ECTransition>
+      <ECTransition Source="opening2" Destination="open" Condition="REQ[NOT DoorClosed2]" x="2434.375" y="1718.4">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="630.4713,402.4455,604.7228,461.4879" />
+      </ECTransition>
+      <ECTransition Source="calc" Destination="opening0" Condition="doOpen0" x="1114.616" y="886.1778">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="303.7246,193.524,215.4067,227.1821" />
+      </ECTransition>
+      <ECTransition Source="calc" Destination="opening1" Condition="doOpen1" x="1752.873" y="1031.947">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="449.9597,241.3262,421.4148,272.9716" />
+      </ECTransition>
+      <ECTransition Source="calc" Destination="opening2" Condition="doOpen2" x="2276.001" y="1051.614">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="556.4254,247.8279,585.4172,279.5811" />
+      </ECTransition>
+      <ECTransition Source="open" Destination="closing" Condition="T1exp" x="2902.056" y="1951.031">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="702.3408,524.5102,781.3528,477.1374" />
+      </ECTransition>
+      <ECTransition Source="closed" Destination="calc" Condition="REQ" x="2026.829" y="635.9454">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="506.9099,149.6637,506.7425,167.9667" />
+      </ECTransition>
+      <ECTransition Source="closing" Destination="closed" Condition="REQ[allClosed]" x="2962.196" y="775.9657">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="804.8671,214.1907,723.5748,146.5381" />
+      </ECTransition>
+      <ECTransition Source="closing" Destination="closing" Condition="REQ[NOT allClosed]" x="3479.815" y="1634.086">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="919.0468,420.3468,853.983,420.3468" />
+      </ECTransition>
+      <ECTransition Source="calc" Destination="closed" Condition="NOT(doOpen0 OR doOpen1 OR doOpen2)" x="1752.642" y="659.7088">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="423.9249,174.7903,423.8173,156.557" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST Text=";&#xD;&#xA;allClosed:=DoorClosed0 &amp; DoorClosed1 &amp; DoorClosed2;&#xD;&#xA;" />
+    </Algorithm>
+    <Algorithm Name="CALC">
+      <ST Text="doOpen0:=(floor=0) AND (ButtonAt0 OR ButtonFor0);&#xD;&#xA;doOpen1:=(floor=1) AND (ButtonAt1 OR ButtonFor1);&#xD;&#xA;doOpen2:=(floor=2) AND (ButtonAt2 OR ButtonFor2);&#xD;&#xA;&#xD;&#xA;allClosed:=DoorClosed0 &amp; DoorClosed1 &amp; DoorClosed2;&#xD;&#xA;" />
+    </Algorithm>
+    <Algorithm Name="CHK">
+      <ST Text="allClosed:=DoorClosed0 &amp; DoorClosed1 &amp; DoorClosed2;" />
+    </Algorithm>
+    <Algorithm Name="OPEN0">
+      <ST Text="door0:=TRUE;&#xD;&#xA;" />
+    </Algorithm>
+    <Algorithm Name="OPEN1">
+      <ST Text="door1:=TRUE;;" />
+    </Algorithm>
+    <Algorithm Name="OPEN2">
+      <ST Text="door2:=TRUE;" />
+    </Algorithm>
+    <Algorithm Name="CLOSING">
+      <ST Text="door0:=FALSE;&#xD;&#xA;door1:=FALSE;&#xD;&#xA;door2:=FALSE;&#xD;&#xA;" />
+    </Algorithm>
+  </BasicFB>
+</FBType>

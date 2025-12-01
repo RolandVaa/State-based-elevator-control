@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c1abbf3c-e9d1-41f1-9198-8771eb2ecaa8" Name="ControlPLCcomp" Comment="Composite Function Block Type" Namespace="Main">
+  <Attribute Name="Configuration.FB.IDCounter" Value="8" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmBH" Version="0.0" Author="vv263" Date="7/26/2023" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT">
+        <With Var="OnFloor0" />
+        <With Var="OnFloor1" />
+        <With Var="OnFloor2" />
+        <With Var="ButtonAt0" />
+        <With Var="ButtonAt1" />
+        <With Var="ButtonAt2" />
+        <With Var="ButtonFor0" />
+        <With Var="ButtonFor1" />
+        <With Var="ButtonFor2" />
+        <With Var="DoorClosed0" />
+        <With Var="DoorClosed1" />
+        <With Var="DoorClosed2" />
+        <With Var="DoorOpened0" />
+        <With Var="DoorOpened1" />
+        <With Var="DoorOpened2" />
+        <With Var="MODE" />
+      </Event>
+      <Event Name="REQ">
+        <With Var="OnFloor0" />
+        <With Var="OnFloor1" />
+        <With Var="OnFloor2" />
+        <With Var="ButtonAt0" />
+        <With Var="ButtonAt1" />
+        <With Var="ButtonAt2" />
+        <With Var="ButtonFor0" />
+        <With Var="ButtonFor1" />
+        <With Var="ButtonFor2" />
+        <With Var="DoorClosed0" />
+        <With Var="DoorClosed1" />
+        <With Var="DoorClosed2" />
+        <With Var="DoorOpened0" />
+        <With Var="DoorOpened1" />
+        <With Var="DoorOpened2" />
+        <With Var="MODE" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO">
+        <With Var="MoveUp" />
+        <With Var="MoveDown" />
+        <With Var="Open0" />
+        <With Var="Open1" />
+        <With Var="Open2" />
+      </Event>
+      <Event Name="CNF">
+        <With Var="MoveUp" />
+        <With Var="MoveDown" />
+        <With Var="Open0" />
+        <With Var="Open1" />
+        <With Var="Open2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="OnFloor0" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="OnFloor1" Type="BOOL" />
+      <VarDeclaration Name="OnFloor2" Type="BOOL" />
+      <VarDeclaration Name="ButtonAt0" Type="BOOL" />
+      <VarDeclaration Name="ButtonAt1" Type="BOOL" />
+      <VarDeclaration Name="ButtonAt2" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor0" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor1" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor2" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed0" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed1" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed2" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened0" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened1" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened2" Type="BOOL" />
+      <VarDeclaration Name="MODE" Type="INT" InitialValue="1" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MoveUp" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="MoveDown" Type="BOOL" />
+      <VarDeclaration Name="Open0" Type="BOOL" />
+      <VarDeclaration Name="Open1" Type="BOOL" />
+      <VarDeclaration Name="Open2" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="6" Name="FB1" Type="PLCControl" x="2040" y="580" Namespace="Main" />
+    <FB ID="7" Name="FB2" Type="E_DELAY" x="3840" y="700" Namespace="IEC61499.Standard" />
+    <FB ID="8" Name="FB3" Type="E_CYCLE" x="640" y="660" Namespace="IEC61499.Standard">
+      <Parameter Name="DT" Value="T#500ms" />
+    </FB>
+    <Input Name="OnFloor0" x="1140" y="912" Type="Data" />
+    <Input Name="OnFloor1" x="1140" y="972" Type="Data" />
+    <Input Name="OnFloor2" x="1140" y="1032" Type="Data" />
+    <Input Name="DoorClosed0" x="1140" y="1452" Type="Data" />
+    <Input Name="DoorClosed1" x="1140" y="1512" Type="Data" />
+    <Input Name="DoorClosed2" x="1140" y="1572" Type="Data" />
+    <Input Name="ButtonAt0" x="1140" y="1092" Type="Data" />
+    <Input Name="ButtonAt1" x="1140" y="1152" Type="Data" />
+    <Input Name="ButtonAt2" x="1140" y="1212" Type="Data" />
+    <Input Name="ButtonFor0" x="1140" y="1272" Type="Data" />
+    <Input Name="ButtonFor1" x="1140" y="1332" Type="Data" />
+    <Input Name="ButtonFor2" x="1140" y="1392" Type="Data" />
+    <Input Name="DoorOpened0" x="1140" y="1632" Type="Data" />
+    <Input Name="DoorOpened1" x="1140" y="1692" Type="Data" />
+    <Input Name="DoorOpened2" x="1140" y="1752" Type="Data" />
+    <Input Name="INIT" x="1160" y="592" Type="Event" />
+    <Input Name="REQ" x="1060" y="652" Type="Event" />
+    <Input Name="MODE" x="140" y="1812" Type="Data" />
+    <Output Name="MoveUp" x="2900" y="912" Type="Data" />
+    <Output Name="MoveDown" x="2900" y="972" Type="Data" />
+    <Output Name="Open0" x="2900" y="1032" Type="Data" />
+    <Output Name="Open1" x="2900" y="1092" Type="Data" />
+    <Output Name="Open2" x="2900" y="1152" Type="Data" />
+    <Output Name="INITO" x="2920" y="592" Type="Event" />
+    <Output Name="CNF" x="2920" y="652" Type="Event" />
+    <EventConnections>
+      <Connection Source="FB1.INITO" Destination="INITO" />
+      <Connection Source="FB1.CNF" Destination="CNF" />
+      <Connection Source="INIT" Destination="FB1.INIT" />
+      <Connection Source="FB1.Start_t1" Destination="FB2.START" />
+      <Connection Source="FB2.EO" Destination="FB1.End_t1" dx1="48.5" dx2="90" dy="-340">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB1.INITO" Destination="FB3.START" dx1="41.58325" dx2="50" dy="-110" />
+      <Connection Source="FB3.EO" Destination="FB1.REQ">
+        <Points>
+          <Points>
+            <X>245.375</X>
+            <Y>175</Y>
+          </Points>
+          <Points>
+            <X>257.5</X>
+            <Y>175</Y>
+          </Points>
+          <Points>
+            <X>257.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>170</Y>
+          </Points>
+          <Points>
+            <X>505</X>
+            <Y>170</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="REQ" Destination="FB1.REQ" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="OnFloor0" Destination="FB1.OnFloor0" />
+      <Connection Source="OnFloor1" Destination="FB1.OnFloor1" />
+      <Connection Source="OnFloor2" Destination="FB1.OnFloor2" />
+      <Connection Source="DoorClosed0" Destination="FB1.DoorClosed0" />
+      <Connection Source="DoorClosed1" Destination="FB1.DoorClosed1" />
+      <Connection Source="DoorClosed2" Destination="FB1.DoorClosed2" />
+      <Connection Source="ButtonAt0" Destination="FB1.ButtonOn0" />
+      <Connection Source="ButtonAt1" Destination="FB1.ButtonOn1" />
+      <Connection Source="ButtonAt2" Destination="FB1.ButtonOn2" />
+      <Connection Source="ButtonFor0" Destination="FB1.CabButton0" />
+      <Connection Source="ButtonFor1" Destination="FB1.CabButton1" />
+      <Connection Source="ButtonFor2" Destination="FB1.CabButton2" />
+      <Connection Source="FB1.liftUp" Destination="MoveUp" />
+      <Connection Source="FB1.liftDown" Destination="MoveDown" />
+      <Connection Source="DoorOpened0" Destination="FB1.DoorOpened0" />
+      <Connection Source="DoorOpened1" Destination="FB1.DoorOpened1" />
+      <Connection Source="DoorOpened2" Destination="FB1.DoorOpened2" />
+      <Connection Source="FB1.door0" Destination="Open0" />
+      <Connection Source="FB1.door1" Destination="Open1" />
+      <Connection Source="FB1.door2" Destination="Open2" />
+      <Connection Source="FB1.t1_PT" Destination="FB2.DT" dx1="971.5833">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="MODE" Destination="FB1.MODE" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

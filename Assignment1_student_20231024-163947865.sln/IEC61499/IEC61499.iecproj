@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Assignment1_student" Guid="{EE48556B-4E39-4C7A-8646-4D1812E9B79E}" Version="1.5.0.0" xmlns="http://www.nxtcontrol.com/IEC61499.xsd">
+  <Archive>
+    <ExcludeDir>
+      <string>Exports</string>
+      <string>Imports</string>
+      <string>Documentation</string>
+    </ExcludeDir>
+  </Archive>
+  <References />
+  <CanvasResolution StartCanvasClass="HMI.Main.Canvases.StartCanvas_4" Width="600" Height="680" WorkAreaWidth="600" WorkAreaHeight="600" Template="Default" Login="true" NavigationControl="0" CurrentUser="true" LanguageButton="true" RuntimeConnection="true" Logger="false" NavigationBar="true" NewVersionDeployed="true" Exit="false" ShowWarningMessage="false" WarningText="" SiblingButtonCount="5" ChildButtonCount="5" IsCanvasTopologyPanel="true" ResizeBehaviour="None">
+    <Topology Name="Default">
+      <Canvases>
+        <Canvas Name="Simple" Title="" Tooltip="" Instance="HMI.Main.Canvases.Simple" />
+      </Canvases>
+    </Topology>
+  </CanvasResolution>
+  <CanvasResolution StartCanvasClass="HMI.Main.Canvases.StartCanvas_2" Width="1280" Height="800" WorkAreaWidth="1280" WorkAreaHeight="720" Template="Default" Login="true" NavigationControl="2" CurrentUser="true" LanguageButton="true" RuntimeConnection="true" Logger="false" NavigationBar="true" NewVersionDeployed="true" Exit="false" ShowWarningMessage="false" WarningText="" SiblingButtonCount="0" ChildButtonCount="0" IsCanvasTopologyPanel="true" ResizeBehaviour="None">
+    <Topology Name="Default" />
+  </CanvasResolution>
+  <CanvasResolution StartCanvasClass="" Width="-1" Height="-1" WorkAreaWidth="-1" WorkAreaHeight="-1" Template="" Login="true" NavigationControl="0" CurrentUser="true" LanguageButton="true" RuntimeConnection="true" Logger="false" NavigationBar="true" NewVersionDeployed="true" Exit="false" ShowWarningMessage="false" WarningText="" SiblingButtonCount="5" ChildButtonCount="5" IsCanvasTopologyPanel="true" ResizeBehaviour="None">
+    <Topology Name="Default" />
+  </CanvasResolution>
+  <Graphics Name="Graphics" IsExternal="false" />
+  <WebGraphics Name="WebGraphics" IsExternal="false" />
+  <Security Level="Internal" IsActive="true">
+    <Info>﻿&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;UserManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" HighestID="2"&gt;&lt;UserInfos Name="DIAS" Password="$1$AEF847D3CEE5D01DAA13627BC0A2B37DAE23F1E8DD0AA404DABCB036F4A4B998$D26498A9056EFEB2CB824589D9AD2A4D28680603579D286811A7A3C80E0286D0" SecurityToken="127" ID="1" MeetsCalLaw="true" /&gt;&lt;/UserManager&gt;</Info>
+  </Security>
+  <PluginGUIDs />
+</ProjectDatabase>

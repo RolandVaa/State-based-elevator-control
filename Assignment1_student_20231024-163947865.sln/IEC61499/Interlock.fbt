@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c6385d0e-8f67-4f55-830e-fc117bdf2623" Name="Interlock" Comment="Basic Function Block Type" Namespace="Main">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmBH" Version="0.0" Author="vv263" Date="7/27/2023" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="B1" />
+        <With Var="B2" />
+        <With Var="B3" />
+        <With Var="B4" />
+        <With Var="B5" />
+        <With Var="B6" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="B1" />
+        <With Var="B2" />
+        <With Var="B3" />
+        <With Var="B4" />
+        <With Var="B5" />
+        <With Var="B6" />
+      </Event>
+      <Event Name="RESET" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="L1" />
+        <With Var="L2" />
+        <With Var="L3" />
+        <With Var="L4" />
+        <With Var="L5" />
+        <With Var="L6" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="L1" />
+        <With Var="L2" />
+        <With Var="L3" />
+        <With Var="L4" />
+        <With Var="L5" />
+        <With Var="L6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="B1" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="B2" Type="BOOL" />
+      <VarDeclaration Name="B3" Type="BOOL" />
+      <VarDeclaration Name="B4" Type="BOOL" />
+      <VarDeclaration Name="B5" Type="BOOL" />
+      <VarDeclaration Name="B6" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="L1" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="L2" Type="BOOL" />
+      <VarDeclaration Name="L3" Type="BOOL" />
+      <VarDeclaration Name="L4" Type="BOOL" />
+      <VarDeclaration Name="L5" Type="BOOL" />
+      <VarDeclaration Name="L6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <InternalVars>
+      <VarDeclaration Name="NumOn" Type="INT" />
+      <VarDeclaration Name="NumLitOn" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="INIT" Comment="Initialization" x="923.5294" y="141.1765">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="217.647" y="752.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="RESET" x="1484" y="740">
+        <ECAction Algorithm="INIT" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="731.1476" y="204.8375" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="797.5924" y="348.3232" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="447.8488" y="648.3352" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="300.8799" y="536.7757">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="63.69833,139.6098,82.6262,121.3461" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="RESET" Condition="RESET" x="1030.659" y="510.5651">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="231.1405,114.8248,282.668,131.5787" />
+      </ECTransition>
+      <ECTransition Source="RESET" Destination="START" Condition="1" x="1012.12" y="665.1988">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="282.3781,180.437,226.4828,161.7911" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST Text="L1:=FALSE;&#xD;&#xA;L2:=FALSE;&#xD;&#xA;L3:=FALSE;&#xD;&#xA;L4:=FALSE;&#xD;&#xA;L5:=FALSE;&#xD;&#xA;L6:=FALSE;" />
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST Text="NumOn:=0;&#xD;&#xA;NumLitOn:=0;&#xD;&#xA;IF B1 THEN NumOn:=NumOn+1; END_IF;&#xD;&#xA;IF B2 THEN NumOn:=NumOn+1; END_IF;&#xD;&#xA;IF B3 THEN NumOn:=NumOn+1; END_IF;&#xD;&#xA;IF B4 THEN NumOn:=NumOn+1; END_IF;&#xD;&#xA;IF B5 THEN NumOn:=NumOn+1; END_IF;&#xD;&#xA;IF B6 THEN NumOn:=NumOn+1; END_IF;&#xD;&#xA;&#xD;&#xA;IF L1 THEN NumLitOn:=NumLitOn+1; END_IF;&#xD;&#xA;IF L2 THEN NumLitOn:=NumLitOn+1; END_IF;&#xD;&#xA;IF L3 THEN NumLitOn:=NumLitOn+1; END_IF;&#xD;&#xA;IF L4 THEN NumLitOn:=NumLitOn+1; END_IF;&#xD;&#xA;IF L5 THEN NumLitOn:=NumLitOn+1; END_IF;&#xD;&#xA;IF L6 THEN NumLitOn:=NumLitOn+1; END_IF;&#xD;&#xA;&#xD;&#xA;IF (NumOn=1)&amp;(NumLitOn=0) THEN &#xD;&#xA;  L1:=B1;&#xD;&#xA;  L2:=B2;&#xD;&#xA;  L3:=B3;&#xD;&#xA;  L4:=B4;&#xD;&#xA;  L5:=B5;&#xD;&#xA;  L6:=B6;&#xD;&#xA;END_IF;" />
+    </Algorithm>
+  </BasicFB>
+</FBType>

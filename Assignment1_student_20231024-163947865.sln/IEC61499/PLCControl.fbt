@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6a08cf01-cf9f-47ad-b047-ae966e94d7bc" Name="PLCControl" Comment="Basic Function Block Type" Namespace="Main">
+  <Attribute Name="Configuration.FB.IDCounter" Value="0" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="6/17/2016" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="OnFloor0" />
+        <With Var="OnFloor1" />
+        <With Var="OnFloor2" />
+        <With Var="ButtonOn0" />
+        <With Var="ButtonOn1" />
+        <With Var="ButtonOn2" />
+        <With Var="CabButton0" />
+        <With Var="CabButton1" />
+        <With Var="CabButton2" />
+        <With Var="DoorClosed0" />
+        <With Var="DoorClosed1" />
+        <With Var="DoorClosed2" />
+        <With Var="DoorOpened0" />
+        <With Var="DoorOpened1" />
+        <With Var="DoorOpened2" />
+        <With Var="MODE" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="OnFloor0" />
+        <With Var="OnFloor1" />
+        <With Var="OnFloor2" />
+        <With Var="ButtonOn0" />
+        <With Var="ButtonOn1" />
+        <With Var="ButtonOn2" />
+        <With Var="CabButton0" />
+        <With Var="CabButton1" />
+        <With Var="CabButton2" />
+        <With Var="DoorClosed0" />
+        <With Var="DoorClosed1" />
+        <With Var="DoorClosed2" />
+        <With Var="DoorOpened0" />
+        <With Var="DoorOpened1" />
+        <With Var="DoorOpened2" />
+        <With Var="MODE" />
+      </Event>
+      <Event Name="End_t1" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="liftUp" />
+        <With Var="liftDown" />
+        <With Var="door0" />
+        <With Var="door1" />
+        <With Var="door2" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="liftUp" />
+        <With Var="liftDown" />
+        <With Var="door0" />
+        <With Var="door1" />
+        <With Var="door2" />
+        <With Var="t1_PT" />
+        <With Var="x" />
+        <With Var="y" />
+        <With Var="allClosed" />
+        <With Var="state_move" />
+        <With Var="state_door" />
+        <With Var="doOpen0" />
+        <With Var="doOpen1" />
+        <With Var="doOpen2" />
+        <With Var="t1_Q" />
+        <With Var="t1_IN" />
+        <With Var="doStop" />
+        <With Var="z" />
+      </Event>
+      <Event Name="Start_t1">
+        <With Var="t1_PT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="OnFloor0" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="OnFloor1" Type="BOOL" />
+      <VarDeclaration Name="OnFloor2" Type="BOOL" />
+      <VarDeclaration Name="ButtonOn0" Type="BOOL" />
+      <VarDeclaration Name="ButtonOn1" Type="BOOL" />
+      <VarDeclaration Name="ButtonOn2" Type="BOOL" />
+      <VarDeclaration Name="CabButton0" Type="BOOL" />
+      <VarDeclaration Name="CabButton1" Type="BOOL" />
+      <VarDeclaration Name="CabButton2" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed0" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed1" Type="BOOL" />
+      <VarDeclaration Name="DoorClosed2" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened0" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened1" Type="BOOL" />
+      <VarDeclaration Name="DoorOpened2" Type="BOOL" />
+      <VarDeclaration Name="MODE" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="liftUp" Type="BOOL" />
+      <VarDeclaration Name="liftDown" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="door0" Type="BOOL" />
+      <VarDeclaration Name="door1" Type="BOOL" />
+      <VarDeclaration Name="door2" Type="BOOL" />
+      <VarDeclaration Name="t1_PT" Type="TIME" />
+      <VarDeclaration Name="x" Type="INT" />
+      <VarDeclaration Name="y" Type="INT" />
+      <VarDeclaration Name="allClosed" Type="BOOL" />
+      <VarDeclaration Name="state_move" Type="INT" />
+      <VarDeclaration Name="state_door" Type="INT" />
+      <VarDeclaration Name="doOpen0" Type="BOOL" />
+      <VarDeclaration Name="doOpen1" Type="BOOL" />
+      <VarDeclaration Name="doOpen2" Type="BOOL" />
+      <VarDeclaration Name="t1_Q" Type="BOOL" />
+      <VarDeclaration Name="t1_IN" Type="BOOL" />
+      <VarDeclaration Name="doStop" Type="BOOL" />
+      <VarDeclaration Name="z" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,T1Q,REQ1,REQ2" />
+    <InternalVars>
+      <VarDeclaration Name="STATE_STOPPED" Type="INT" InitialValue="0" />
+      <VarDeclaration Name="STATE_GOING_UP" Type="INT" InitialValue="1" />
+      <VarDeclaration Name="STATE_GOING_DOWN" Type="INT" InitialValue="2" />
+      <VarDeclaration Name="STATE_CLOSED" Type="INT" InitialValue="0" />
+      <VarDeclaration Name="STATE_OPENING0" Type="INT" InitialValue="1" />
+      <VarDeclaration Name="STATE_OPENING1" Type="INT" InitialValue="2" />
+      <VarDeclaration Name="STATE_OPENING2" Type="INT" InitialValue="3" />
+      <VarDeclaration Name="STATE_OPEN" Type="INT" InitialValue="4" />
+      <VarDeclaration Name="STATE_CLOSING" Type="INT" InitialValue="5" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1735.164" y="389.4117" />
+      <ECState Name="INIT" x="2300" y="260">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ1" x="1748" y="1012">
+        <ECAction Algorithm="REQ1" Output="CNF" />
+      </ECState>
+      <ECState Name="StartT1" x="1744" y="1516">
+        <ECAction Output="Start_t1" />
+      </ECState>
+      <ECState Name="EndT1" x="644" y="656">
+        <ECAction Algorithm="T1Q" />
+      </ECState>
+      <ECState Name="REQ2" x="3084" y="924">
+        <ECAction Algorithm="REQ2" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2037.551" y="245.8997">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="497.2807,60.27797,525.0732,55.37059" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="2056.095" y="403.6823">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="528.9035,101.2092,500.3149,107.7592" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="REQ1" Condition="REQ[MODE=1]" x="1738.121" y="692.2751">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="433.8703,150.7742,434.7708,193.9583" />
+      </ECTransition>
+      <ECTransition Source="REQ1" Destination="StartT1" Condition="t1_IN" x="1745.892" y="1272.249">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="436.5883,302.0879,436.3419,335.4114" />
+      </ECTransition>
+      <ECTransition Source="StartT1" Destination="START" Condition="1" x="1342.903" y="955.4915">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="308.4801,281.7047,308.071,196.5053" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EndT1" Condition="End_t1" x="1023.211" y="412.559">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="279.465,88.12246,211.4877,104.7928" />
+      </ECTransition>
+      <ECTransition Source="EndT1" Destination="REQ1" Condition="1" x="983.3571" y="978.3748">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="195.3071,241.9925,268.5696,266.1624" />
+      </ECTransition>
+      <ECTransition Source="REQ1" Destination="START" Condition="NOT t1_IN" x="2013.967" y="776.7023">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="519.8749,221.2344,518.4509,179.0953" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="REQ2" Condition="REQ[MODE=2]" x="2434.95" y="586.5172">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="564.4822,124.3703,653.5606,159.3094" />
+      </ECTransition>
+      <ECTransition Source="REQ2" Destination="START" Condition="NOT t1_IN" x="2411.723" y="737.7158">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="650.2782,208.154,558.2107,171.6646" />
+      </ECTransition>
+      <ECTransition Source="REQ2" Destination="StartT1" Condition="t1_IN" x="2452.324" y="1290.751">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="660.1761,307.292,567.9039,348.0571" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST Text=";&#xD;&#xA;t1_IN :=FALSE;&#xD;&#xA;t1_Q  :=FALSE;&#xD;&#xA;state_move := STATE_STOPPED;&#xD;&#xA;state_door := STATE_CLOSED;&#xD;&#xA; " />
+    </Algorithm>
+    <Algorithm Name="REQ1" Comment="Normally executed algorithm">
+      <ST Text=";&#xD;&#xA;&#xD;&#xA;allClosed := DoorClosed0 AND DoorClosed1 AND DoorClosed2;	&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;IF ButtonOn0 OR CabButton0 THEN&#xD;&#xA;	x:= 0;&#xD;&#xA;ELSIF ButtonOn1 OR CabButton1 THEN&#xD;&#xA;	x:= 1;&#xD;&#xA;ELSIF ButtonOn2 OR CabButton2 THEN&#xD;&#xA;	x:= 2;&#xD;&#xA;ELSE&#xD;&#xA;	x:=-2;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;IF OnFloor0 THEN&#xD;&#xA;	y:= 0;&#xD;&#xA;ELSIF OnFloor1 THEN&#xD;&#xA;	y:=1;&#xD;&#xA;ELSIF OnFloor2 THEN&#xD;&#xA;	y:=2;&#xD;&#xA;ELSE&#xD;&#xA;	y:=-2;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;doStop := (y=0 AND (ButtonOn0 OR CabButton0)) OR (y=1 AND (ButtonOn1 OR CabButton1)) OR (y=2 AND (ButtonOn2 OR CabButton2));&#xD;&#xA;doOpen0 := y=0 AND (ButtonOn0 OR CabButton0);&#xD;&#xA;doOpen1 := y=1 AND (ButtonOn1 OR CabButton1);&#xD;&#xA;doOpen2 := y=2 AND (ButtonOn2 OR CabButton2);&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;IF state_move = STATE_STOPPED THEN&#xD;&#xA;	liftUp := FALSE; liftDown:= FALSE;&#xD;&#xA;	IF allClosed AND x &lt; y AND x &gt;= 0 THEN&#xD;&#xA;		state_move:= STATE_GOING_DOWN;&#xD;&#xA;	ELSIF allClosed AND x &gt; y AND x &gt;= 0 THEN&#xD;&#xA;		state_move:= STATE_GOING_UP;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_move = STATE_GOING_UP THEN&#xD;&#xA;	liftUp:=TRUE; liftDown:= FALSE;&#xD;&#xA;	IF doStop THEN&#xD;&#xA;		state_move := STATE_STOPPED;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_move = STATE_GOING_DOWN THEN&#xD;&#xA;	liftDown:= TRUE; liftUp:= FALSE;&#xD;&#xA;	IF doStop THEN&#xD;&#xA;		state_move := STATE_STOPPED;&#xD;&#xA;	END_IF;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;IF state_door = STATE_CLOSED THEN&#xD;&#xA;	IF doOpen0 THEN&#xD;&#xA;		state_door := STATE_OPENING0;&#xD;&#xA;	ELSIF doOpen1 THEN&#xD;&#xA;		state_door := STATE_OPENING1;&#xD;&#xA;	ELSIF doOpen2 THEN&#xD;&#xA;		state_door := STATE_OPENING2;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPENING0 THEN&#xD;&#xA;	door0:= TRUE;&#xD;&#xA;	IF DoorOpened0 THEN&#xD;&#xA;		state_door := STATE_OPEN;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPENING1 THEN&#xD;&#xA;	door1:=TRUE;&#xD;&#xA;	IF DoorOpened1 THEN&#xD;&#xA;		state_door := STATE_OPEN;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPENING2 THEN&#xD;&#xA;	door2:=TRUE;&#xD;&#xA;	IF DoorOpened2 THEN&#xD;&#xA;		state_door := STATE_OPEN;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPEN THEN&#xD;&#xA;	t1_IN:=TRUE;&#xD;&#xA;	t1_PT:=T#3S;&#xD;&#xA;	Start_t1:=TRUE;&#xD;&#xA;	IF t1_Q  THEN&#xD;&#xA;		t1_IN:=FALSE;&#xD;&#xA;		End_t1:=TRUE;&#xD;&#xA;		t1_Q := FALSE;&#xD;&#xA;		state_door := STATE_CLOSING;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_CLOSING THEN&#xD;&#xA;	door0:= FALSE;&#xD;&#xA;	door1:= FALSE;&#xD;&#xA;	door2:= FALSE;&#xD;&#xA;	IF allClosed THEN&#xD;&#xA;		state_door := STATE_CLOSED;&#xD;&#xA;	END_IF;&#xD;&#xA;END_IF;&#xD;&#xA;		&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
+    </Algorithm>
+    <Algorithm Name="T1Q">
+      <ST Text="t1_Q:=TRUE;&#xD;&#xA;" />
+    </Algorithm>
+    <Algorithm Name="REQ2">
+      <ST Text=";&#xD;&#xA;allClosed := DoorClosed0 AND DoorClosed1 AND DoorClosed2;	&#xD;&#xA;&#xD;&#xA;IF CabButton0 THEN&#xD;&#xA;	z:= 0;&#xD;&#xA;ELSIF CabButton1 THEN&#xD;&#xA;	z:= 1;&#xD;&#xA;ELSIF CabButton2 THEN&#xD;&#xA;	z:= 2;&#xD;&#xA;ELSE&#xD;&#xA;	z:=-2;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;IF ButtonOn0 THEN&#xD;&#xA;	x:= 0;&#xD;&#xA;ELSIF ButtonOn1 THEN&#xD;&#xA;	x:= 1;&#xD;&#xA;ELSIF ButtonOn2 THEN&#xD;&#xA;	x:= 2;&#xD;&#xA;ELSE&#xD;&#xA;	x:=-2;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;IF OnFloor0 THEN&#xD;&#xA;	y:= 0;&#xD;&#xA;ELSIF OnFloor1 THEN&#xD;&#xA;	y:=1;&#xD;&#xA;ELSIF OnFloor2 THEN&#xD;&#xA;	y:=2;&#xD;&#xA;ELSE&#xD;&#xA;	y:=-2;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;doStop := (y=0 AND (ButtonOn0 OR CabButton0)) OR (y=1 AND (ButtonOn1 OR CabButton1)) OR (y=2 AND (ButtonOn2 OR CabButton2));&#xD;&#xA;doOpen0 := y=0 AND (ButtonOn0 OR CabButton0);&#xD;&#xA;doOpen1 := y=1 AND (ButtonOn1 OR CabButton1);&#xD;&#xA;doOpen2 := y=2 AND (ButtonOn2 OR CabButton2);&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;IF state_move = STATE_STOPPED THEN&#xD;&#xA;	liftUp := FALSE; liftDown:= FALSE;&#xD;&#xA;	IF allClosed AND z &lt; y AND z &gt;= 0 THEN&#xD;&#xA;	state_move:= STATE_GOING_DOWN;&#xD;&#xA;	ELSIF allClosed AND z &gt; y AND z &gt;= 0 THEN&#xD;&#xA;	state_move:= STATE_GOING_UP;&#xD;&#xA;	ELSIF allClosed AND x &lt; y AND x &gt;= 0 THEN&#xD;&#xA;		state_move:= STATE_GOING_DOWN;&#xD;&#xA;	ELSIF allClosed AND x &gt; y AND x &gt;= 0 THEN&#xD;&#xA;		state_move:= STATE_GOING_UP;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_move = STATE_GOING_UP THEN&#xD;&#xA;	liftUp:=TRUE; liftDown:= FALSE;&#xD;&#xA;	IF doStop THEN&#xD;&#xA;		state_move := STATE_STOPPED;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_move = STATE_GOING_DOWN THEN&#xD;&#xA;	liftDown:= TRUE; liftUp:= FALSE;&#xD;&#xA;	IF doStop THEN&#xD;&#xA;		state_move := STATE_STOPPED;&#xD;&#xA;	END_IF;&#xD;&#xA;END_IF;&#xD;&#xA;&#xD;&#xA;IF state_door = STATE_CLOSED THEN&#xD;&#xA;	IF doOpen0 THEN&#xD;&#xA;		state_door := STATE_OPENING0;&#xD;&#xA;	ELSIF doOpen1 THEN&#xD;&#xA;		state_door := STATE_OPENING1;&#xD;&#xA;	ELSIF doOpen2 THEN&#xD;&#xA;		state_door := STATE_OPENING2;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPENING0 THEN&#xD;&#xA;	door0:= TRUE;&#xD;&#xA;	IF DoorOpened0 THEN&#xD;&#xA;		state_door := STATE_OPEN;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPENING1 THEN&#xD;&#xA;	door1:=TRUE;&#xD;&#xA;	IF DoorOpened1 THEN&#xD;&#xA;		state_door := STATE_OPEN;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPENING2 THEN&#xD;&#xA;	door2:=TRUE;&#xD;&#xA;	IF DoorOpened2 THEN&#xD;&#xA;		state_door := STATE_OPEN;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_OPEN THEN&#xD;&#xA;	t1_IN:=TRUE;&#xD;&#xA;	t1_PT:=T#3S;&#xD;&#xA;	Start_t1:=TRUE;&#xD;&#xA;	IF t1_Q  THEN&#xD;&#xA;		t1_IN:=FALSE;&#xD;&#xA;		End_t1:=TRUE;&#xD;&#xA;		t1_Q := FALSE;&#xD;&#xA;		state_door := STATE_CLOSING;&#xD;&#xA;	END_IF;&#xD;&#xA;ELSIF state_door = STATE_CLOSING THEN&#xD;&#xA;	door0:= FALSE;&#xD;&#xA;	door1:= FALSE;&#xD;&#xA;	door2:= FALSE;&#xD;&#xA;	IF allClosed THEN&#xD;&#xA;		state_door := STATE_CLOSED;&#xD;&#xA;	END_IF;&#xD;&#xA;END_IF;&#xD;&#xA;" />
+    </Algorithm>
+  </BasicFB>
+</FBType>
