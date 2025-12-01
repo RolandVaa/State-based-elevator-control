@@ -7,4 +7,4 @@ This project implements a state-based control application for a three-floor elev
 ![First Image Description](images/state-based.png)
 
 
-![Second Image Description](images/image2.png)
+![Second Image Description](images/2.png)
