@@ -1,1 +1,3 @@
 # State-based-elevator-control
+
+This project implements a state-based control application for a three-floor elevator in the IEC 61499 environment. The system is structured around two coordinated state machines: one controlling elevator movement and one managing door operations. Several states execute Structured Text algorithms using IF-THEN-ELSE logic. All required behaviors have been completed, including button processing, movement direction decisions, priority handling between cab and floor buttons, stop conditions, and a 3-second timed door-opening sequence. The full application has been tested in the IEC 61499 environment.
